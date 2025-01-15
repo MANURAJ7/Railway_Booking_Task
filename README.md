@@ -30,5 +30,3 @@ This is Railway Reservation & Routing system.
 
 **Relation between Station & Seats :**
 ![Relation between Stations & Seats Image](https://github.com/MANURAJ7/Railway_Booking_Task/blob/main/README_images/database/station_to_seat.png)
-
-![Working Img](https://stock.adobe.com/search?k=work+in+progress+sign)
