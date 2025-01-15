@@ -1,21 +1,14 @@
 # Project Intro
 
-This is Railway Ticket Bookings Site build using Node.js backend, React,js front end and Postgres DB.
+This is Railway Reservation & Routing system.
 
-## Roles
+**Old approach**  
+`Monolithic DB system` : Implemented using SQL DB (PostgreSQL) only by aquiring Row level locks in DB with Serialized transactions.
 
-**USER :**
+**Currently implementing**  
+`Polyglot Persistence system` : Utilizing Neo4j for Routing queries & PostgreSQL for general queries like user data. Redis Redlock for distributed locking of resorces/data as this is a multi database system.
 
-- Login with id password gettings JWT token for auth.
-- Search Trains between two stations getting details [train_is, train_name, timing] availability [coach_id, available_seats]
-- Able to book seats in particular coaches of a train.
-
-**ADMIN :**
-
-- Login with API key getting access token.
-- Able to add craete new trains and set their available seats.
-
-# Tables & Schemas
+## Old Schemas
 
 - `trains` : **[** train_id, train_name, source , destination, timing **]**
 - `coaches` : **[** id, train_id, coach_name , available_seats **]**
@@ -24,7 +17,18 @@ This is Railway Ticket Bookings Site build using Node.js backend, React,js front
 - `users` : **[** user_id, name, password **]**
 - `admin` : **[** keys **]**
 
-# Implementation Details
+## New Workflow & Schema
 
-- `Real time updates` are served using web socket connections where user joins the specific rooms of the trains he has searched for on a booking event the updates are shared with all the users who have searched the particular train .
-- `Handling Race condition` : To handle multiple users making booking transactions at the same time the booking transactions are executed under _SERIALIZED ISOLATION LEVEL_ this will use row level locks so only the particualar coach/s of a train will be locked .
+**Transaction Workflow :**
+![Transaction Workflow Image](https://github.com/MANURAJ7/Railway_Booking_Task/blob/main/README_images/workflow/transaction.png)
+
+**Query Workflow :**
+![Query Workflow Image](https://github.com/MANURAJ7/Railway_Booking_Task/blob/main/README_images/workflow/Get_trains.png)
+
+**Relation between Stations :**
+![Relation between Stations Image](https://github.com/MANURAJ7/Railway_Booking_Task/blob/main/README_images/database/station_to_station.png)
+
+**Relation between Station & Seats :**
+![Relation between Stations & Seats Image](https://github.com/MANURAJ7/Railway_Booking_Task/blob/main/README_images/database/station_to_seat.png)
+
+![Working Img](https://stock.adobe.com/search?k=work+in+progress+sign)
