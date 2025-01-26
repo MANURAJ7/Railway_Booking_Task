@@ -1,4 +1,4 @@
-function handleSocketConnection(io) {
+const HandleSocketConnection = (io) => {
   io.on("connection", (socket) => {
     console.log(socket.id, " connected!!");
     socket.on("joinRoom", (train_id) => {
@@ -11,5 +11,5 @@ function handleSocketConnection(io) {
       socket.emit("seatUpdates", updates);
     });
   });
-}
-module.exports = handleSocketConnection;
+};
+export { HandleSocketConnection };
